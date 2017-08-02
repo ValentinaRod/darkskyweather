@@ -27,23 +27,34 @@ function clima(latitud,longitud){
 		type: 'GET',
 		datatype: 'JSON',
 	})
+.done(function(response) {
+            console.log(response);
+            		var temp= data.currently.temperature;		
+					var wind= windSpeed
+					var humi= data.currently.humidity;
+					var uvIndex= data.currently.precipProbability;
+					var pressure= data.currently.pressure;
+         
+            $('#mobile_weather1').append('<br>'+ temp +  '<br>'+ humi  + '<br>'+ uvIndex + '<br>' + pressure + '<br>'+'<a href=index2.html><button type="button" class="btn btn-default">Default</button></a>');
+       
+         
+		response.daily.data.forEach(function(a){
+			var max = a.apparentTemperatureMax;
+			var min = a.apparentTemperatureMin;
+			$("#mobile_weather2").append("<div class='row linea-dias'><div class='col-md-6 col-xs-6 text-left'><img src='dist/img/"+response.daily.icon+".png'><span>Dia</span></div><div class='col-md-6 col-xs-6 text-right'><p>"+max+"º"+" - "+min+"º"+"</p></div></div>");
 
-	.done(function(respuesta){
-					console.log("successe");
-					console.log(respuesta);
-					mostrarClima(respuesta);
-				})
-				.fail(function(){
-					console.log("error");
-				})
-			function mostrarClima(data){
-					console.log(data);
-				$.each(data.currently,function(i,item){
+		});
+       //
+        })
+        .fail(function() {
+            console.log('error')
+        })
+        .always(function() {
+            console.log('complete')
+        });
+};
 					
-				});
-			}
-
-
+				
 
 
 
