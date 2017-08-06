@@ -10340,3 +10340,54 @@ $.ajax({
 	
 });
 
+//api flicker 
+/*Clave:
+9e321d12911fff56780613ca0c434547
+
+Secreto:
+80a9e96ec793826b*/
+/* no resulta
+
+
+
+
+
+function FlickrPhoto(title, owner, flickrURL, imageURL) {
+    this.title = title;
+    this.owner = owner;
+    this.flickrURL = flickrURL;
+    this.imageURL = imageURL;
+}
+
+function FlickrService() {
+    this.flickrApiKey = "9e321d12911fff56780613ca0c434547";
+    this.flickrGetInfoURL = "https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=427afa96e180a145685af658a83f59bb&photo_id=&secret=&format=json&nojsoncallback=1&api_sig=7c6c0ee5d471114fedc66e7c2453fbed";
+
+    this.getPhotoInfo = function(photoId, callback) {
+        var ajaxOptions = {
+            type: 'GET',
+            url: this.flickrGetInfoURL,
+            data: { api_key: this.flickrApiKey, photo_id: photoId },
+            dataType: 'json',
+            success: function (data) { 
+                if (data.stat == "ok") {
+                    var photo = data.photo;
+                    var photoTitle = photo.title._content;
+                    var photoOwner = photo.owner.realname;
+                    var photoWebURL = photo.urls.url[0]._content;
+                    var photoStaticURL = "https://farm" + photo.farm + ".staticflickr.com/" +  photo.server + "/" + photo.id + "_" + photo.secret + "_b.jpg";
+
+                    var flickrPhoto = new FlickrPhoto(photoTitle, photoOwner, photoWebURL, photoStaticURL);
+                    callback(flickrPhoto);
+
+                   $('body').css('background-image', 'url(' + flickrPhoto+ ')');
+                
+                }
+            }
+        };
+
+        $.ajax(ajaxOptions);
+    }
+}
+
+*/
