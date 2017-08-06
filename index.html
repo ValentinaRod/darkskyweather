@@ -3,16 +3,66 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Dark Sky</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 	<link rel="stylesheet" href="dist/css/style.min.css">
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		<div class="col-xs-12">
-			<div id="mobile_weather1" class="mobile_weather center-block">
-				<img src="doc/iconos/1498814593_sun.png" alt="aqui hay una imagen de un sol Responsive image" class="img-responsive">
+<div class="container eltiempo">
+	<div class="row text-center">
+		<div class="col-s-12 text-center">
+			<div id="mobile_weather1" class="mobile_weather text-center">
+				<img src="doc/iconos/1498814593_sun.png" alt="aqui hay una imagen de un sol Responsive image" class="img-responsive sol">
+
 			</div>
 		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12-12 text-center">
+			<div class= "temperatura">
+				
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-sm-6 text-left">
+			
+				<p>Wind:</p>
+			</div>
+			<div class="col-sm-6 text-right">
+				<p class="win"></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 text-left">
+				<p>Humidity:</p>
+			</div>
+			<div class="col-sm-6 text-right">
+				<p class="humi"></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 text-left">
+				<p>UV Index:</p>
+			</div>
+			<div class="col-sm-6 text-right">
+				<p class="uvInd"></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 text-left">
+				<p>Pressure:</p>
+			</div>
+			<div class="col-sm-6 text-right">
+				<p class="press"></p>
+			</div>
+
+		</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<a href="index-2.html">Predicción de la semana</a>
+				</div>
+			</div>
 	</div>
 </div>
 

@@ -1,3 +1,5 @@
+//url:https://api.darksky.net/forecast/07f785110c17c97c87fe46f787f5b090/37.8267,-122.4233
+//key: 07f785110c17c97c87fe46f787f5b090/
 $(document).ready(function($) {
 //me pregunta geolocalizacion
 function geolocation(){
@@ -19,58 +21,68 @@ var functionError = function(error){
 	alert("ubicación no encontrada");
 }
 
-// imprimir datos del clima actual (currently).
-function clima(latitud,longitud){
-	console.log(latitud); //pruebas
-	$.ajax({
-		url: 'https://api.darksky.net/forecast/07f785110c17c97c87fe46f787f5b090/37.8267,-122.4233'+latitud+','+longitud+'?language=es?&units=auto',
+var fareandcelcius = function(temperaturaActual){
+				var calculo = (temperaturaActual - 32)*5/9;
+				var celcius = calculo.toFixed(1) + '°';
+
+					return celcius;
+			}
+
+$.ajax({
+		url: 'https://api.darksky.net/forecast/07f785110c17c97c87fe46f787f5b090/37.8267,-122.4233',
 		type: 'GET',
-		datatype: 'JSON',
+		dataType: 'jsonp',
 	})
-.done(function(response) {
-            console.log(response);
-            		var temp= data.currently.temperature;		
-					var wind= windSpeed
-					var humi= data.currently.humidity;
-					var uvIndex= data.currently.precipProbability;
-					var pressure= data.currently.pressure;
-         
-            $('#mobile_weather1').append('<br>'+ temp +  '<br>'+ humi  + '<br>'+ uvIndex + '<br>' + pressure + '<br>'+'<a href=index2.html><button type="button" class="btn btn-default">Default</button></a>');
-       
-         
-		response.daily.data.forEach(function(a){
-			var max = a.apparentTemperatureMax;
-			var min = a.apparentTemperatureMin;
-			$("#mobile_weather2").append("<div class='row linea-dias'><div class='col-md-6 col-xs-6 text-left'><img src='dist/img/"+response.daily.icon+".png'><span>Dia</span></div><div class='col-md-6 col-xs-6 text-right'><p>"+max+"º"+" - "+min+"º"+"</p></div></div>");
+	.done(function(data) {
+		console.log(data);
 
-		});
-       //
-        })
-        .fail(function() {
-            console.log('error')
-        })
-        .always(function() {
-            console.log('complete')
-        });
-};
-					
-				
+		var temperaturaActual = data.currently.apparentTemperature;
+		var wind = data.currently.windSpeed;
+		var humidity = data.currently.humidity;
+		var uvIndex = data.currently.uvIndex;
+		var pressure = data.currently.pressure;
+		
+		
+		$('.temperatura').append(fareandcelcius(temperaturaActual));
+		$('.win').append(wind +'m/s');
+		$('.humi').append(humidity + '%');
+		$('.uvInd').append(uvIndex);
+		$('.press').append(pressure);
+	
+//dia de la semana index 2
 
+	//minimos
+		var min_lunes = data.daily.data[0].apparentTemperatureMin;
+		var min_martes = data.daily.data[1].apparentTemperatureMin;
+		var min_miercoles = data.daily.data[2].apparentTemperatureMin;
+		var min_jueves = data.daily.data[3].apparentTemperatureMin;
+		var min_viernes = data.daily.data[4].apparentTemperatureMin;
+		var min_sabado = data.daily.data[5].apparentTemperatureMin;
+		var min_domingo = data.daily.data[6].apparentTemperatureMin;
+		//maximo:
 
+		var max_lunes = data.daily.data[0].apparentTemperatureMax;
+		var max_martes = data.daily.data[1].apparentTemperatureMax;
+		var max_miercoles = data.daily.data[2].apparentTemperatureMax;
+		var max_jueves = data.daily.data[3].apparentTemperatureMax;
+		var max_viernes = data.daily.data[4].apparentTemperatureMax;                 
+		var max_sabado = data.daily.data[5].apparentTemperatureMax;
+		var max_domingo = data.daily.data[6].apparentTemperatureMax;
 
+			$('.lunes').append('<h6>'+fareandcelcius(min_lunes) + " - " + fareandcelcius(max_lunes)+'</h6>');
+			$('.martes').append('<h6>'+fareandcelcius(min_martes) + " - " + fareandcelcius(max_martes)+'</h6>');
+			$('.miercoles').append('<h6>'+fareandcelcius(min_miercoles) + " - " + fareandcelcius(max_miercoles)+'</h6>');
+			$('.jueves').append('<h6>'+fareandcelcius(min_jueves) + " - " + fareandcelcius(max_jueves)+'</h6>'); 
+			$('.viernes').append('<h6>'+fareandcelcius(min_viernes) + " - " + fareandcelcius(max_viernes)+'</h6>');
+			$('.sabado').append('<h6>'+fareandcelcius(min_sabado) + " - " + fareandcelcius(max_sabado)+'</h6>');
+			$('.domingo').append('<h6>'+fareandcelcius(min_domingo) + " - " + fareandcelcius(max_domingo)+'</h6>');
+	
+
+		})
+	.fail(function() {
+		console.log("error");
+	})
+	
+	
 });
-/*acceder api de flicker 
-var jsonFlicker= "https://api.flickr.com/services/rest/?method=flickr.photos.geo.photosForLocation&api_key=b352bdbfb32a1ecdb35af15c9ea0c73e&lat=&lon=&accuracy=&extras=&per_page=&page=&format=json&nojsoncallback=1&api_sig=39ef3e4e78b8690b8d9e39333b2082dc";
-getJASON.("")
 
-getJson(jsonFlicker,function(data){
-	console.log(data);
-$.each(data.)
-
-
-
-
-
-
-
-});*/
